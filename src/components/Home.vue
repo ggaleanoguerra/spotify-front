@@ -33,7 +33,6 @@
             :key="track.id"
             class="track-item"
           >
-            <p class="text-center">{{ track.name }}</p>
             <img
               :src="track.album.images[0].url"
               :alt="track.name"
