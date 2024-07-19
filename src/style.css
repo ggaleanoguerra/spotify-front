@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.bg-custom{
+  background-color: rgba(30,215,96,.8);
+}
+
+.bg-custom:hover {
+  background-color: #198841; 
+}
