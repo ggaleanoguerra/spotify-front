@@ -1,5 +1,4 @@
 <script setup>
-import Home from "./components/Home.vue";
 import NavBar from "./components/NavBar.vue";
 import Footer from "./components/Footer.vue";
 </script>
@@ -8,7 +7,7 @@ import Footer from "./components/Footer.vue";
   <div class="bg-black">
     <NavBar class="bg-black" />
     <main class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-black antialiased h-screen">
-      <Home class="mt-20" />
+      <router-view class="mt-20" /> <!-- Aquí se renderizan las rutas -->
     </main>
     <Footer />
   </div>
