@@ -14,9 +14,19 @@
           <img src="../icons/spotify-icon.svg" class="h-6 mr-2" alt="Spotify logo" />
           Sign In with Spotify
         </button>
-        <div v-else>
-          <span>Welcome, User!</span>
-          <button @click="logout" type="button" class="ml-4 text-sm text-red-600">Logout</button>
+        <div v-else class="relative">
+          <img
+            :src="userProfile?.images[0]?.url"
+            alt="User Profile"
+            class="h-10 w-10 rounded-full cursor-pointer"
+            @click="toggleDropdown"
+          />
+          <div v-if="dropdownOpen" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-20">
+            <div class="py-1">
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700">{{ userProfile.display_name }}</a>
+              <a @click="logout" class="block px-4 py-2 text-sm text-gray-700 cursor-pointer">Logout</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -24,18 +34,23 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
-import { isAuthenticated, checkAuth, setAuthenticated } from '../store/auth';
+import { isAuthenticated, userProfile, checkAuth, setAuthenticated } from '../store/auth';
 
 export default {
   name: "NavBar",
   setup() {
     const router = useRouter();
+    const dropdownOpen = ref(false);
 
     onMounted(() => {
       checkAuth();
     });
+
+    const toggleDropdown = () => {
+      dropdownOpen.value = !dropdownOpen.value;
+    };
 
     const loginWithSpotify = () => {
       const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
@@ -43,19 +58,31 @@ export default {
       const scope = encodeURIComponent('user-read-private user-read-email');
       const authUrl = `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&scope=${scope}&redirect_uri=${redirectUri}`;
       window.location.href = authUrl;
-      // console.log('authUrl:', authUrl); // <-- Verifica la URL de autenticación
     };
 
     const logout = () => {
       localStorage.removeItem('spotify_token');
+      localStorage.removeItem('spotify_user_profile');
       setAuthenticated(false);
-      router.push('/'); // Redirige a la página de inicio
+      router.push('/');
     };
+
+    watch(isAuthenticated, (newVal) => {
+      if (newVal) {
+        const profile = localStorage.getItem('spotify_user_profile');
+        if (profile) {
+          userProfile.value = JSON.parse(profile);
+        }
+      }
+    });
 
     return {
       isAuthenticated,
+      userProfile,
       loginWithSpotify,
       logout,
+      dropdownOpen,
+      toggleDropdown,
     };
   },
 };

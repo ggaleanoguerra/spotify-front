@@ -1,5 +1,5 @@
 <template>
-    <div v-if="isAuthenticated">
+    <div v-if="isAuthenticated" class="absolute top-0 left-0 right-0 z-10 p-4 text-center text-white bg-black animate__animated animate__fadeIn">
       <h1 class="text-white">Dashboard</h1>
       <p class="text-white">Welcome to the dashboard!</p>
     </div>
