@@ -55,7 +55,7 @@ export default {
     const loginWithSpotify = () => {
       const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
       const redirectUri = encodeURIComponent(`${window.location.origin}/callback`);
-      const scope = encodeURIComponent('user-read-private user-read-email');
+      const scope = encodeURIComponent('user-read-private user-read-email user-read-playback-state');
       const authUrl = `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&scope=${scope}&redirect_uri=${redirectUri}`;
       window.location.href = authUrl;
     };

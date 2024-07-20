@@ -31,10 +31,23 @@ onMounted(async () => {
         },
       });
       const userProfile = profileResponse.data;
-      console.log("User profile:", userProfile);
 
       localStorage.setItem("spotify_user_profile", JSON.stringify(userProfile));
       setUserProfile(userProfile);
+
+      const playingCurrently = await axios.get(
+        "https://api.spotify.com/v1/me/player/currently-playing",
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      const currentTrack = playingCurrently.data.item;
+      
+      if (currentTrack) {
+        localStorage.setItem("spotify_current_track", JSON.stringify(currentTrack));
+      }
 
       router.push("/dashboard");
     } catch (error) {
