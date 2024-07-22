@@ -1,6 +1,3 @@
-<script setup>
-</script>
-
 <template>
   <div class="relative">
     <div
@@ -104,6 +101,56 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.container {
+  max-width: 100%;
+  overflow-x: hidden;
+  text-align: center;
+}
+
+.image-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.track-item {
+  flex: 0 1 100px;
+  margin: 5px;
+  box-sizing: border-box;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  max-width: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+@media (max-width: 600px) {
+  .track-item {
+    flex: 0 1 80px;
+  }
+  .image {
+    max-width: 80px;
+  }
+}
+.title {
+  animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+</style>
 
 <style scoped>
 .container {
