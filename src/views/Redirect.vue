@@ -25,11 +25,14 @@ onMounted(async () => {
       localStorage.setItem("spotify_token", accessToken);
       setAuthenticated(true);
 
-      const profileResponse = await axios.get("https://api.spotify.com/v1/me", {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      const profileResponse = await axios.get(
+        `${import.meta.env.VITE_API_URL}/profile`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
       const userProfile = profileResponse.data;
 
       localStorage.setItem("spotify_user_profile", JSON.stringify(userProfile));
