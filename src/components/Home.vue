@@ -2,7 +2,7 @@
   <div class="relative">
     <div
       v-if="tracks.length"
-      class="absolute top-0 left-0 right-0 z-10 p-4 text-center text-white bg-black bg-opacity-55 animate__animated animate__fadeIn"
+      class="absolute top-0 left-0 right-0 z-10 p-4 text-center text-white bg-black bg-opacity-100 animate__animated animate__fadeIn"
     >
       <h1
         class="text-white font-bold md:text-6xl md:mt-2 text-5xl mt-44 md:text-left"
