@@ -20,7 +20,7 @@
       </p>
     </div>
     <div class="relative flex items-center justify-center h-screen z-0">
-      <div class="container">
+      <div class="container mt-28">
         <ul
           v-if="tracks.length"
           class="image-container animate__animated animate__fadeIn"
